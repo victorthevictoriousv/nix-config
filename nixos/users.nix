@@ -1,0 +1,37 @@
+{ pkgs, ... }:
+
+{
+  # User account
+  users.users.victor = {
+    isNormalUser = true;
+    description = "Victor Pettersson";
+    shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+    ];
+  };
+
+  # Passwordless nixos-rebuild
+  security.sudo.extraRules = [
+    {
+      users = [ "victor" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
+  # Graphical sudo askpass (for non-terminal contexts)
+  environment.variables.SUDO_ASKPASS = "${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen";
+  security.sudo.extraConfig = ''
+    Defaults env_keep += "SUDO_ASKPASS"
+  '';
+
+  # Zsh (user config in home/, system-level enable for /etc/shells)
+  programs.zsh.enable = true;
+}
