@@ -1,0 +1,47 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.modules.gnome;
+in
+{
+  options.modules.gnome.enable = lib.mkEnableOption "gnome";
+
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      gnomeExtensions.maximized-by-default-actually-reborn
+    ];
+
+    gtk = {
+      enable = true;
+      iconTheme = {
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+      };
+    };
+
+    dconf.settings = {
+      "org/gnome/shell" = {
+        enabled-extensions = [
+          "gnome-shell-extension-maximized-by-default@stiggimy.github.com"
+        ];
+      };
+      "org/gnome/desktop/peripherals/mouse" = {
+        accel-profile = "flat";
+      };
+      "org/gnome/desktop/interface" = {
+        enable-animations = false;
+        color-scheme = "prefer-dark";
+        gtk-theme = "Adwaita-dark";
+      };
+      "org/gnome/desktop/background" = {
+        picture-uri = "file://${config.home.homeDirectory}/Pictures/wallpaper.jpg";
+        picture-uri-dark = "file://${config.home.homeDirectory}/Pictures/wallpaper.jpg";
+        picture-options = "zoom";
+      };
+    };
+  };
+}

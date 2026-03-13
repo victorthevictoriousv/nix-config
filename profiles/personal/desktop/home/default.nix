@@ -7,6 +7,9 @@
     # Terminal and shell
     zsh.enable = true;
 
+    # Desktop environment
+    gnome.enable = true;
+
     # Version control
     git.enable = true;
   };
