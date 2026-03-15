@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./cooling.nix
   ];
 
   networking.hostName = "victor";
