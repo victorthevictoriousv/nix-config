@@ -12,9 +12,9 @@ in
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
-      userName = "victor";
-      userEmail = "victorthevictoriousv@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "victor";
+        user.email = "victorthevictoriousv@gmail.com";
         init.defaultBranch = "main";
         pull.rebase = true;
       };
