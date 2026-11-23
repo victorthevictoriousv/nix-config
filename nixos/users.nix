@@ -10,6 +10,8 @@
       "networkmanager"
       "wheel"
       "input"
+      "video"
+      "render"
     ];
   };
 

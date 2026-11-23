@@ -12,6 +12,7 @@
 
   # Networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
