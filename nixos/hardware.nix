@@ -7,7 +7,7 @@
     enable32Bit = true;
   };
 
-  # ROCm/OpenCL for AMD GPU (required by DaVinci Resolve)
+  # ROCm/OpenCL for AMD GPU
   hardware.amdgpu.opencl.enable = true;
 
   # Firmware and AMD microcode updates
